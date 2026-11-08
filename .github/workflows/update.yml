@@ -1,0 +1,50 @@
+name: Update bucket on new g8s release
+
+on:
+  schedule:
+    - cron: '47 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout bucket
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Bump manifest to the latest g8s release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          LATEST=$(gh api repos/tamld/g8s/releases/latest --jq .tag_name | sed 's/^v//')
+          CURRENT=$(jq -r .version bucket/g8s.json)
+          echo "latest=${LATEST} current=${CURRENT}"
+          if [ "${LATEST}" = "${CURRENT}" ]; then
+            echo "Manifest is up to date."
+            exit 0
+          fi
+          BASE="https://github.com/tamld/g8s/releases/download/v${LATEST}"
+          CS=$(curl -fsSL "${BASE}/checksums.txt")
+          AMD=$(echo "${CS}" | awk -v f="g8s_${LATEST}_windows_amd64.zip" '$2==f{print $1}')
+          ARM=$(echo "${CS}" | awk -v f="g8s_${LATEST}_windows_arm64.zip" '$2==f{print $1}')
+          for v in "${AMD}" "${ARM}"; do
+            [ -n "${v}" ] || { echo "ERROR: missing checksum entry in checksums.txt"; exit 1; }
+          done
+          jq --arg v "${LATEST}" --arg amd "${AMD}" --arg arm "${ARM}" '
+            .version = $v |
+            .architecture."64bit".url = "https://github.com/tamld/g8s/releases/download/v\($v)/g8s_\($v)_windows_amd64.zip" |
+            .architecture."64bit".hash = $amd |
+            .architecture.arm64.url = "https://github.com/tamld/g8s/releases/download/v\($v)/g8s_\($v)_windows_arm64.zip" |
+            .architecture.arm64.hash = $arm' bucket/g8s.json > bucket/g8s.json.tmp
+          mv bucket/g8s.json.tmp bucket/g8s.json
+          jq -e .version bucket/g8s.json > /dev/null
+          git diff --stat
+          git config user.name "g8s-bucket-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add bucket/g8s.json
+          git commit -m "g8s ${LATEST} (checksums from tamld/g8s release)"
+          git push
