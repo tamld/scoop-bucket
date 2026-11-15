@@ -1,38 +1,38 @@
 {
-    "version": "0.23.0",
-    "description": "Zero-Trust Process & Capability Harness for AI Agents",
-    "homepage": "https://github.com/tamld/g8s",
-    "license": "MIT",
-    "architecture": {
-        "64bit": {
-            "url": "https://github.com/tamld/g8s/releases/download/v0.23.0/g8s_0.23.0_windows_amd64.zip",
-            "hash": "8e7a16cfc752ab9b221dc99fc0e8c124eadea6bc0e31680288c00409360bfca0"
-        },
-        "arm64": {
-            "url": "https://github.com/tamld/g8s/releases/download/v0.23.0/g8s_0.23.0_windows_arm64.zip",
-            "hash": "347078defc4b7d18b3a3da211f9b829b15e56e6e996ebfd18712255d25bce4ad"
-        }
+  "version": "0.24.0",
+  "description": "Zero-Trust Process & Capability Harness for AI Agents",
+  "homepage": "https://github.com/tamld/g8s",
+  "license": "MIT",
+  "architecture": {
+    "64bit": {
+      "url": "https://github.com/tamld/g8s/releases/download/v0.24.0/g8s_0.24.0_windows_amd64.zip",
+      "hash": "abb4d56028b31e626c68ab309cdf94bee70f94231d8b3d42cc0f9de09ea9571c"
     },
-    "bin": "g8s.exe",
-    "checkver": {
-        "github": "https://github.com/tamld/g8s"
-    },
-    "autoupdate": {
-        "architecture": {
-            "64bit": {
-                "url": "https://github.com/tamld/g8s/releases/download/v$version/g8s_$version_windows_amd64.zip",
-                "hash": {
-                    "url": "https://github.com/tamld/g8s/releases/download/v$version/checksums.txt",
-                    "find": "g8s_$version_windows_amd64\\.zip\\s+([a-fA-F0-9]{64})"
-                }
-            },
-            "arm64": {
-                "url": "https://github.com/tamld/g8s/releases/download/v$version/g8s_$version_windows_arm64.zip",
-                "hash": {
-                    "url": "https://github.com/tamld/g8s/releases/download/v$version/checksums.txt",
-                    "find": "g8s_$version_windows_arm64\\.zip\\s+([a-fA-F0-9]{64})"
-                }
-            }
-        }
+    "arm64": {
+      "url": "https://github.com/tamld/g8s/releases/download/v0.24.0/g8s_0.24.0_windows_arm64.zip",
+      "hash": "d9e0e993b7e59d8e836b83738551ac1ed9d7f58b90c983c12d54036d0e0bd019"
     }
+  },
+  "bin": "g8s.exe",
+  "checkver": {
+    "github": "https://github.com/tamld/g8s"
+  },
+  "autoupdate": {
+    "architecture": {
+      "64bit": {
+        "url": "https://github.com/tamld/g8s/releases/download/v$version/g8s_$version_windows_amd64.zip",
+        "hash": {
+          "url": "https://github.com/tamld/g8s/releases/download/v$version/checksums.txt",
+          "find": "g8s_$version_windows_amd64\\.zip\\s+([a-fA-F0-9]{64})"
+        }
+      },
+      "arm64": {
+        "url": "https://github.com/tamld/g8s/releases/download/v$version/g8s_$version_windows_arm64.zip",
+        "hash": {
+          "url": "https://github.com/tamld/g8s/releases/download/v$version/checksums.txt",
+          "find": "g8s_$version_windows_arm64\\.zip\\s+([a-fA-F0-9]{64})"
+        }
+      }
+    }
+  }
 }
