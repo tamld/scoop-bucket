@@ -1,16 +1,16 @@
 {
-  "version": "0.24.0",
+  "version": "0.25.0",
   "description": "Zero-Trust Process & Capability Harness for AI Agents",
   "homepage": "https://github.com/tamld/g8s",
   "license": "MIT",
   "architecture": {
     "64bit": {
-      "url": "https://github.com/tamld/g8s/releases/download/v0.24.0/g8s_0.24.0_windows_amd64.zip",
-      "hash": "abb4d56028b31e626c68ab309cdf94bee70f94231d8b3d42cc0f9de09ea9571c"
+      "url": "https://github.com/tamld/g8s/releases/download/v0.25.0/g8s_0.25.0_windows_amd64.zip",
+      "hash": "da7fd1d147f1f792d29c0fa69acdb0a0290e225fbce526ebce2c7e9a14b231aa"
     },
     "arm64": {
-      "url": "https://github.com/tamld/g8s/releases/download/v0.24.0/g8s_0.24.0_windows_arm64.zip",
-      "hash": "d9e0e993b7e59d8e836b83738551ac1ed9d7f58b90c983c12d54036d0e0bd019"
+      "url": "https://github.com/tamld/g8s/releases/download/v0.25.0/g8s_0.25.0_windows_arm64.zip",
+      "hash": "aa159bcc87f1bf65537df00ce498cf4a3b1f09f49bb5a91cefb2a55b067113d4"
     }
   },
   "bin": "g8s.exe",
